@@ -5,6 +5,7 @@ import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
 import dagger.Module
 import dagger.Provides
 
+
 /***
  * Модули
 Создаем модули, которые будут уметь предоставлять требуемые объекты.
