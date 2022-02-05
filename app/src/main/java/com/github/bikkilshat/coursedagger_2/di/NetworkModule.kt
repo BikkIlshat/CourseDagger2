@@ -6,6 +6,7 @@ import com.github.bikkilshat.coursedagger_2.network.ServerApi
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
+import javax.inject.Qualifier
 
 
 /***
@@ -29,24 +30,36 @@ class NetworkModule {
     return NetworkUtils(connectionManager)
   }
 
-  //Пример с Named
-  //Создаем два разных ServerApi в модуле даггера:
-  @Named("prod")
+
+  /*
+  Qualifier
+Вместо только что рассмотренной нами аннотации @Named с текстовым значением мы можем создавать
+свои аннотации. Для этого необходимо использовать Qualifier.
+Создадим две аннотации: Prod и Dev:
+   */
+  @Qualifier
+  @Retention(AnnotationRetention.RUNTIME)
+  annotation class Prod
+
+  @Qualifier
+  @Retention(AnnotationRetention.RUNTIME)
+  annotation class Dev
+  /*
+  Они так же, как и Named, помогут даггеру различать два способа создания объекта ServerApi.
+  И мы, соответственно, используем одну из них, чтобы сказать компоненту, какой именно ServerApi нам нужен:
+   */
+
+  @Prod
   @Provides
   fun provideServerApiProd(): ServerApi {
     return ServerApi("prod.server.com") // объект  работает с prod сервером
   }
 
-  @Named("dev")
+  @Dev
   @Provides
   fun provideServerApiDev(): ServerApi {
     return ServerApi("dev.server.com") // объект  работает с dev сервером
   }
-  //Прописываем в компоненте метод для получения ServerApi
-  /*
-  Теперь даггер может отличить эти объекты.
-   А мы сможем указать, какой из них нам нужен. Для этого мы также используем Named в компоненте:
-   */
 
 
 }
