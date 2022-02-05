@@ -1,6 +1,7 @@
 package com.github.bikkilshat.coursedagger_2.di
 
-import com.github.bikkilshat.coursedagger_2.DatabaseHelper
+import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
+import com.github.bikkilshat.coursedagger_2.storage.Repository
 import dagger.Module
 import dagger.Provides
 
@@ -13,9 +14,16 @@ import dagger.Provides
 @Module
 class StorageModule {
 
+  //В модуле создали Provides метод для создания объекта Repository
   @Provides
-  fun provideDatabaseHelper() : DatabaseHelper {
-    return DatabaseHelper()
+  fun provideRepository(): Repository {
+    return Repository()
+  }
+
+  // Добавили Repository как аргумент в Provides метод создания DatabaseHelper:
+  @Provides
+  fun provideDatabaseHelper(repository: Repository) : DatabaseHelper {
+    return DatabaseHelper(repository)
   }
 }
 

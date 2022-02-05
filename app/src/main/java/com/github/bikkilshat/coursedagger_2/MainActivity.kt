@@ -2,14 +2,12 @@ package com.github.bikkilshat.coursedagger_2
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.bikkilshat.coursedagger_2.di.App
-import javax.inject.Inject
+import com.github.bikkilshat.coursedagger_2.presenter.MainActivityPresenter
 
 class MainActivity : AppCompatActivity() {
-  @Inject
-  lateinit var databaseHelper: DatabaseHelper
-  @Inject
-  lateinit var networkUtils: NetworkUtils
+
+  lateinit var mainActivityPresenter: MainActivityPresenter
+
 
   /*
 Аннотациями @Inject мы помечаем поля, которые компонент должен заполнить (инджектить).
@@ -22,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     //Чтобы добраться до компонента из MainActivity, мы можем сделать так:
-    val appComponent = (application as App).appComponent
+    mainActivityPresenter = (application as App).appComponent.getMainActivityPresenter()
   }
 
 
