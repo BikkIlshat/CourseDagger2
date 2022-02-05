@@ -2,7 +2,9 @@ package com.github.bikkilshat.coursedagger_2
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
 import com.github.bikkilshat.coursedagger_2.network.ServerApi
+import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     //Чтобы добраться до компонента из MainActivity, мы можем сделать так:
     (application as App).appComponent.getServerApiProd()
+
 
   }
 }

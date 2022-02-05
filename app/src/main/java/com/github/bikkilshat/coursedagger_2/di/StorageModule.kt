@@ -1,9 +1,11 @@
 package com.github.bikkilshat.coursedagger_2.di
 
+import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
 import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
 import com.github.bikkilshat.coursedagger_2.storage.Repository
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.ElementsIntoSet
 
 /***
  * Модули
