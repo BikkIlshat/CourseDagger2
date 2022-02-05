@@ -15,7 +15,8 @@ interface AppComponent {
 
   /*
 Граф зависимостей компонента теперь включает три объекта:
-MainActivityPresenter, DatabaseHelper, NetworkUtils.
+StorageModule содержит объект MainActivityPresenter,
+NetworkModule содержит объект DatabaseHelper, NetworkUtils.
 Причем нам нужен только один из них - презентер.
 Два других мы напрямую у компонента не запрашиваем, но он сам создает их, чтобы создать презентер.
  */

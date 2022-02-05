@@ -2,7 +2,6 @@ package com.github.bikkilshat.coursedagger_2
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.bikkilshat.coursedagger_2.di.App
 import com.github.bikkilshat.coursedagger_2.presenter.MainActivityPresenter
 
 class MainActivity : AppCompatActivity() {

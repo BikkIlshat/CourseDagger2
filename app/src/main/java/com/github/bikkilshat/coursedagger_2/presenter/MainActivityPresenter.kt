@@ -1,7 +1,7 @@
 package com.github.bikkilshat.coursedagger_2.presenter
 
-import com.github.bikkilshat.coursedagger_2.DatabaseHelper
-import com.github.bikkilshat.coursedagger_2.NetworkUtils
+import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
+import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
 
 /*
 В примерах прошлого урока граф  (@Component) состоял всего из двух объектов: DatabaseHelper и NetworkUtils.

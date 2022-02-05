@@ -1,7 +1,7 @@
 package com.github.bikkilshat.coursedagger_2.di
 
-import com.github.bikkilshat.coursedagger_2.DatabaseHelper
-import com.github.bikkilshat.coursedagger_2.NetworkUtils
+import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
+import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
 import com.github.bikkilshat.coursedagger_2.presenter.MainActivityPresenter
 import dagger.Module
 import dagger.Provides

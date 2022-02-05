@@ -1,6 +1,7 @@
 package com.github.bikkilshat.coursedagger_2.di
 
-import com.github.bikkilshat.coursedagger_2.NetworkUtils
+import com.github.bikkilshat.coursedagger_2.network.ConnectionManager
+import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
 import dagger.Module
 import dagger.Provides
 
@@ -13,9 +14,16 @@ import dagger.Provides
 @Module
 class NetworkModule {
 
+  // В модуле создали Provides метод для создания объекта ConnectionManager
   @Provides
-  fun provideNetworkUtils(): NetworkUtils {
-    return NetworkUtils()
+  fun provideConnectionManager(): ConnectionManager {
+    return ConnectionManager()
+  }
+
+  // Добавили ConnectionManager как аргумент в Provides метод создания NetworkUtils:
+  @Provides
+  fun provideNetworkUtils(connectionManager: ConnectionManager): NetworkUtils {
+    return NetworkUtils(connectionManager)
   }
 
 }
