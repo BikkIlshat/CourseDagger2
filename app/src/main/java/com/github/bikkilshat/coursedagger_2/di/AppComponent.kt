@@ -1,7 +1,6 @@
 package com.github.bikkilshat.coursedagger_2.di
 
-import com.github.bikkilshat.coursedagger_2.DatabaseHelper
-import com.github.bikkilshat.coursedagger_2.NetworkUtils
+import com.github.bikkilshat.coursedagger_2.MainActivity
 import dagger.Component
 
 /***
@@ -15,21 +14,30 @@ import dagger.Component
 // в интерфейс компонента методы, которые будут возвращать эти объекты:
 @Component(modules = [StorageModule::class, NetworkModule::class])
 interface AppComponent {
-  /*
-  Создаем два метода. Они могут быть с любым именем, главное - это их возвращаемые типы (NetworkUtils и DatabaseHelper).
-  Они дают понять компоненту, какие именно объекты мы хотим от него получать.
-  При компиляции, даггер проверит, в каком модуле какой объект можно достать,
-  и нагенерит в реализации двух этих методов соответствующий код создания этих объектов.
-   */
-  fun getNetworkUtils(): NetworkUtils // В  NetworkModule он найдет код для создания NetworkUtils
-  fun getDatabaseHelper(): DatabaseHelper  //  в  StorageModule он найдет код для создания DatabaseHelper
 
+  //Inject метод
+  fun injectMainActivity(mainActivity: MainActivity)
   /*
-  Список modules (modules = [StorageModule::class, NetworkModule::class]) - это модули.
-  Здесь нам надо указать модули, в которых компонент сможет найти
-  код создания объектов. В StorageModule он найдет код для создания DatabaseHelper,
-  а в NetworkModule - для NetworkUtils.
+  Вместо пары get-методов мы описываем один inject-метод.
+  Имя может быть любым, главное - это тип его единственного параметра.
+  Мы указываем здесь MainActivity. Тем самым, мы говорим компоненту, что когда
+  мы будем вызывать этот метод и передавать туда экземпляр MainActivity,
+  мы ожидаем, что компонент наполнит этот экземпляр требуемыми объектами.
    */
+
 }
 
 
+/*
+Inject метод
+У нас в MainActivity сейчас всего два объекта, которые мы получаем от компонента.
+Но если их будет штук 20, то придется в интерфейсе компонента описать 20 get-методов
+и в коде MainActivity написать 20 вызовов этих методов.
+У даггера есть более удобное решение для таких случаев.
+Мы можем научить компонент не возвращать объекты, а самому наполнять Activity требуемыми объектами.
+Т.е. мы даем компоненту экземпляр MainActivity, а он смотрит, какие объекты нужны, создает их и сам
+помещает в соответствующие поля.
+
+Разумеется, get-методы и inject-методы могут быть использованы вместе в одном компоненте.
+Автор описывал их отдельно друг от друга только для простоты понимания.
+ */
