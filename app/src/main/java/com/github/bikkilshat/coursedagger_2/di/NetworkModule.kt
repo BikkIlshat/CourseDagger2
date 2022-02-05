@@ -2,8 +2,10 @@ package com.github.bikkilshat.coursedagger_2.di
 
 import com.github.bikkilshat.coursedagger_2.network.ConnectionManager
 import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
+import com.github.bikkilshat.coursedagger_2.network.ServerApi
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 
 /***
@@ -26,6 +28,26 @@ class NetworkModule {
   fun provideNetworkUtils(connectionManager: ConnectionManager): NetworkUtils {
     return NetworkUtils(connectionManager)
   }
+
+  //Пример с Named
+  //Создаем два разных ServerApi в модуле даггера:
+  @Named("prod")
+  @Provides
+  fun provideServerApiProd(): ServerApi {
+    return ServerApi("prod.server.com") // объект  работает с prod сервером
+  }
+
+  @Named("dev")
+  @Provides
+  fun provideServerApiDev(): ServerApi {
+    return ServerApi("dev.server.com") // объект  работает с dev сервером
+  }
+  //Прописываем в компоненте метод для получения ServerApi
+  /*
+  Теперь даггер может отличить эти объекты.
+   А мы сможем указать, какой из них нам нужен. Для этого мы также используем Named в компоненте:
+   */
+
 
 }
 
