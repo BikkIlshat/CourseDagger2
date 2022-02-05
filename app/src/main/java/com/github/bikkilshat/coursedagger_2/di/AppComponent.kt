@@ -12,8 +12,8 @@ import javax.inject.Named
 @Component(modules = [StorageModule::class, NetworkModule::class, MainModule::class])
 interface AppComponent {
 
-  @Named("prod")
-  fun getServerApiProd(): ServerApi
+//  @Named("prod")
+//  fun getServerApiProd(): ServerApi
   /*
     fun getServerApiProd(): ServerApi
   Уже тут возникает вопрос: а какой именно объект ServerApi из двух возможных создаст нам даггер.
@@ -26,7 +26,7 @@ interface AppComponent {
    */
 
 //Если же мы в компоненте используем не get, а inject метод, то в компоненте аннотации не нужны:
-//fun injectMainActivity(mainActivity: MainActivity)
+ fun injectMainActivity(mainActivity: MainActivity)
 
 
 }
