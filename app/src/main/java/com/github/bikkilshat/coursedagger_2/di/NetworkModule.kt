@@ -37,30 +37,37 @@ class NetworkModule {
 свои аннотации. Для этого необходимо использовать Qualifier.
 Создадим две аннотации: Prod и Dev:
    */
+  /*
+  В Qualifier аннотации, которые мы создаем, мы можем добавлять аргументы. Например,
+  у нас есть два Prod сервера: prod1.server.com и prod2.server.com.
+  И мы хотим под каждый из них создавать свой ServerApi.
+  Можно конечно создать аннотации Prod1 и Prod2. А можно использовать одну аннотацию Prod, но с аргументом.
+
+Добавляем String аргумент к аннотации Prod:
+   */
   @Qualifier
   @Retention(AnnotationRetention.RUNTIME)
-  annotation class Prod
+  annotation class Prod (val value: String = "") // Добавляем String аргумент к аннотации Prod:
 
   @Qualifier
   @Retention(AnnotationRetention.RUNTIME)
   annotation class Dev
-  /*
-  Они так же, как и Named, помогут даггеру различать два способа создания объекта ServerApi.
-  И мы, соответственно, используем одну из них, чтобы сказать компоненту, какой именно ServerApi нам нужен:
-   */
 
-  @Prod
+/*
+И используем для создания двух разных объектов ServerApi:
+ */
+  @Prod("1")
   @Provides
-  fun provideServerApiProd(): ServerApi {
-    return ServerApi("prod.server.com") // объект  работает с prod сервером
+  fun provideServerApiProd1(): ServerApi {
+    return ServerApi("prod1.server.com") // объект  работает с prod сервером
   }
 
-  @Dev
+  @Prod("2")
   @Provides
-  fun provideServerApiDev(): ServerApi {
-    return ServerApi("dev.server.com") // объект  работает с dev сервером
+  fun provideServerApiProd2(): ServerApi {
+    return ServerApi("prod2.server.com") // объект  работает с prod сервером
   }
-
+  
 
 }
 

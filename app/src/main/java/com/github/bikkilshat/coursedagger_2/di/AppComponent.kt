@@ -15,7 +15,7 @@ interface AppComponent {
    И мы, соответственно, используем одну из них, чтобы сказать компоненту, какой именно ServerApi нам нужен:
    */
 
-  @NetworkModule.Prod //  сказали компоненту вернуть ServerApi с Qualifier Prod
+  @NetworkModule.Prod("2") //  сказали компоненту вернуть ServerApi с Qualifier Prod
   fun getServerApiProd(): ServerApi
 
 }
