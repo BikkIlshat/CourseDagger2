@@ -6,6 +6,8 @@ import com.github.bikkilshat.coursedagger_2.intoMap.EventModuleIntoMap
 import com.github.bikkilshat.coursedagger_2.intoSet.EvenModule
 import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
 import com.github.bikkilshat.coursedagger_2.network.ServerApi
+import com.github.bikkilshat.coursedagger_2.presenter.MainActivityPresenter
+import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
 import dagger.Component
 
 /***
@@ -31,7 +33,9 @@ interface AppComponent {
 
   fun getEventHandlers(): Set<EventHandler>
 
+  fun DatabaseHelper.getEventHandlers(): Set<EventHandler>
 
+  fun getMainActivityPresenter(): MainActivityPresenter
 
   /*IntoMap
   Теперь даггер сможет собрать коллекцию Set<EventHandler>, состоящую из двух  объектов:

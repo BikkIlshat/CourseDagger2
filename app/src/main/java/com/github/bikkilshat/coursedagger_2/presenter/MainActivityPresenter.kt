@@ -2,21 +2,22 @@ package com.github.bikkilshat.coursedagger_2.presenter
 
 import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
 import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
+import javax.inject.Inject
 
-/*
-В примерах прошлого урока граф  (@Component) состоял всего из двух объектов: DatabaseHelper и NetworkUtils.
-Эти объекты имели пустые конструкторы и легко создавались.
-Но чаще мы имеем дело с более сложными объектами, у которых в конструктор должны передаваться другие объекты.
-Т.е. компоненту для создания одного объекта может потребоваться создать другой объект. Давайте посмотрим, как это сделать в даггере.
- */
-class MainActivityPresenter(
+//добавить аннотацию @Inject constructor к конструктору объекта:
+class MainActivityPresenter  @Inject constructor(
   private val databaseHelper: DatabaseHelper,
   private val networkUtils: NetworkUtils
 ) {
 
-  /*
-  Это презентер для MainActivity. Для создания ему требуются DatabaseHelper и NetworkUtils.
-  Давайте научим даггер создавать такой презентер. Создадим для него class MainModule с аннотацией @Module
-  а в нем Provides метод, который будет создавать объект MainActivityPresenter:
-   */
 }
+
+/*
+И все. Даггер теперь сам может создать этот объект, используя его конструктор.
+ А Provides метод в  MainModule модуле больше не нужен, его можно удалить.
+ Т.е. Inject конструктор - это просто альтернатива Provides методу. Все остальное работает точно также.
+ Объект созданный этим способом:
+- может быть получен от компонента get-методом
+- может быть заинджектен компонентом
+- может быть использован как аргумент в Provides методе создания другого объекта
+ */
