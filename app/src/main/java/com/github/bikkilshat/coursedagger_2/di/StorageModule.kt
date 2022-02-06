@@ -22,11 +22,6 @@ class StorageModule {
     return Repository()
   }
 
-  // Добавили Repository как аргумент в Provides метод создания DatabaseHelper:
-  @Provides
-  fun provideDatabaseHelper(repository: Repository) : DatabaseHelper {
-    return DatabaseHelper(repository)
-  }
 }
 
 /***

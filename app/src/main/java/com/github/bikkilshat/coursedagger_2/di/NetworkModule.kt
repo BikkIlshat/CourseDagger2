@@ -27,13 +27,6 @@ class NetworkModule {
     return ConnectionManager()
   }
 
-  // Добавили ConnectionManager как аргумент в Provides метод создания NetworkUtils:
-  @Provides
-  fun provideNetworkUtils(connectionManager: ConnectionManager): NetworkUtils {
-    return NetworkUtils(connectionManager)
-  }
-
-
   /*
   Qualifier
 Вместо только что рассмотренной нами аннотации @Named с текстовым значением мы можем создавать
