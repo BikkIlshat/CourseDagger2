@@ -1,5 +1,7 @@
 package com.github.bikkilshat.coursedagger_2.storage
 
+import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
+
 /***
  * Объект, который мы будем запрашивать от дагера:
  *
@@ -7,6 +9,8 @@ package com.github.bikkilshat.coursedagger_2.storage
  * Сделаем так, чтобы объект DatabaseHelper сам в свою очередь был составным и требовал другой объект при своем создании.
  */
 class DatabaseHelper(private val repository: Repository) {
+
+
 }
 
 /*
