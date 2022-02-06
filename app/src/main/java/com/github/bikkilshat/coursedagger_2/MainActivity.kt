@@ -13,6 +13,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
 
+  @Inject
   lateinit var mainActivityPresenter: MainActivityPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,12 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     //Чтобы добраться до компонента из MainActivity, мы можем сделать так:
-    mainActivityPresenter = (application as App).appComponent.getMainActivityPresenter()
+    (application as App).appComponent.injectMainActivity(this)
+
+    @Inject
+    fun postInit(networkUtils: NetworkUtils) {
+      // ...
+    }
 
   }
 }

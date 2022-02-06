@@ -1,5 +1,6 @@
 package com.github.bikkilshat.coursedagger_2.di
 
+import com.github.bikkilshat.coursedagger_2.MainActivity
 import com.github.bikkilshat.coursedagger_2.elementsIntoSet.EvenModuleElementsIntoSet
 import com.github.bikkilshat.coursedagger_2.elementsIntoSet.EventHandlerElementsIntoSet
 import com.github.bikkilshat.coursedagger_2.intoMap.EventHandlerIntoMap
@@ -10,6 +11,7 @@ import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
 import com.github.bikkilshat.coursedagger_2.network.ServerApi
 import com.github.bikkilshat.coursedagger_2.presenter.MainActivityPresenter
 import dagger.Component
+import javax.inject.Inject
 
 /***
 Совокупность всех объектов, которые умеет создавать компонент - это граф объектов компонента или граф зависимостей компонента.
@@ -35,7 +37,9 @@ interface AppComponent {
   fun getEventHandlers(): Set<EventHandler>
 
 
-  fun getMainActivityPresenter(): MainActivityPresenter
+ // fun getMainActivityPresenter(): MainActivityPresenter\
+
+  fun injectMainActivity(mainActivity: MainActivity)
 
   /*IntoMap
   Теперь даггер сможет собрать коллекцию Set<EventHandler>, состоящую из двух  объектов:
