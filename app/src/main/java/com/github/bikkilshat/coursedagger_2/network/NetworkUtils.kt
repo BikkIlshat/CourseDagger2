@@ -1,11 +1,13 @@
 package com.github.bikkilshat.coursedagger_2.network
 
+import javax.inject.Inject
+
 /***
  * Объект, который мы будем запрашивать от дагера:
  * Давайте чуть усложним пример.
  * Сделаем так, чтобы объект NetworkUtils сам в свою очередь был составным и требовал другой объект при своем создании.
  */
-class NetworkUtils(private val connectionManager: ConnectionManager) {
+class NetworkUtils @Inject constructor(private val connectionManager: ConnectionManager) {
 
 }
 

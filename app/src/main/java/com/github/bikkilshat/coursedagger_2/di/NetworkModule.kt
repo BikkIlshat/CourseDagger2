@@ -1,14 +1,9 @@
 package com.github.bikkilshat.coursedagger_2.di
 
-import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
 import com.github.bikkilshat.coursedagger_2.network.ConnectionManager
-import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
 import com.github.bikkilshat.coursedagger_2.network.ServerApi
-import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
 import dagger.Module
 import dagger.Provides
-import dagger.multibindings.ElementsIntoSet
-import javax.inject.Named
 import javax.inject.Qualifier
 
 
@@ -25,12 +20,6 @@ class NetworkModule {
   @Provides
   fun provideConnectionManager(): ConnectionManager {
     return ConnectionManager()
-  }
-
-  // Добавили ConnectionManager как аргумент в Provides метод создания NetworkUtils:
-  @Provides
-  fun provideNetworkUtils(connectionManager: ConnectionManager): NetworkUtils {
-    return NetworkUtils(connectionManager)
   }
 
 

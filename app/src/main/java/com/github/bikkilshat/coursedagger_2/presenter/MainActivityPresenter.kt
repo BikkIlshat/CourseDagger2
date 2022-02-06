@@ -1,22 +1,39 @@
 package com.github.bikkilshat.coursedagger_2.presenter
 
-import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
 import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
+import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
+import javax.inject.Inject
 
-/*
-В примерах прошлого урока граф  (@Component) состоял всего из двух объектов: DatabaseHelper и NetworkUtils.
-Эти объекты имели пустые конструкторы и легко создавались.
-Но чаще мы имеем дело с более сложными объектами, у которых в конструктор должны передаваться другие объекты.
-Т.е. компоненту для создания одного объекта может потребоваться создать другой объект. Давайте посмотрим, как это сделать в даггере.
- */
-class MainActivityPresenter(
+//добавить аннотацию @Inject constructor к конструктору объекта:
+class MainActivityPresenter  @Inject constructor(
   private val databaseHelper: DatabaseHelper,
-  private val networkUtils: NetworkUtils
-) {
+ // private val networkUtils: NetworkUtils, //закоментил для примера инжекта в метод
+//@Dev private val serverApi: ServerApi //  Если в конструкторе необходимо получить объект с аннотацией Named или Qualifier, то просто указывайте ее перед объектом:
 
+) {
   /*
-  Это презентер для MainActivity. Для создания ему требуются DatabaseHelper и NetworkUtils.
-  Давайте научим даггер создавать такой презентер. Создадим для него class MainModule с аннотацией @Module
-  а в нем Provides метод, который будет создавать объект MainActivityPresenter:
+  Методы
+Использование аннотации Inject с методами не так распространено, как с конструктором, но иногда бывает полезным.
+Мы можем пометить метод объекта аннотацией Inject, и этот метод будет вызван даггером при создании
+объекта или инджекте в него. Давайте рассмотрим на примерах.
+   */
+
+  @Inject
+  fun postInit(networkUtils: NetworkUtils) {
+    // ...
+  }
+  /*
+  Важно. Если даггер создает объект с помощью Provides метода из модуля,
+  а не создает сам Inject конструктором, то Inject методы вызваны не будут.
    */
 }
+
+/*
+И все. Даггер теперь сам может создать этот объект, используя его конструктор.
+ А Provides метод в  MainModule модуле больше не нужен, его можно удалить.
+ Т.е. Inject конструктор - это просто альтернатива Provides методу. Все остальное работает точно также.
+ Объект созданный этим способом:
+- может быть получен от компонента get-методом
+- может быть заинджектен компонентом
+- может быть использован как аргумент в Provides методе создания другого объекта
+ */
