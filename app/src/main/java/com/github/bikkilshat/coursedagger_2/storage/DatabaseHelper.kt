@@ -1,6 +1,6 @@
 package com.github.bikkilshat.coursedagger_2.storage
 
-import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
+import com.github.bikkilshat.coursedagger_2.elementsIntoSet.EventHandlerElementsIntoSet
 
 /***
  * Объект, который мы будем запрашивать от дагера:
@@ -10,6 +10,9 @@ import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
  */
 class DatabaseHelper(private val repository: Repository) {
 
+  fun getEventHandlers(): Set<EventHandlerElementsIntoSet> {
+    TODO("Not yet implemented")
+  }
 
 }
 
