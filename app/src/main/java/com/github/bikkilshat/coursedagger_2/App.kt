@@ -4,6 +4,7 @@ import android.app.Application
 import com.github.bikkilshat.coursedagger_2.di.AppComponent
 import com.github.bikkilshat.coursedagger_2.di.AppModule
 import com.github.bikkilshat.coursedagger_2.di.DaggerAppComponent
+import com.github.bikkilshat.coursedagger_2.di.NetworkModule
 
 
 /***
@@ -17,8 +18,7 @@ class App: Application() {
   override fun onCreate() {
     super.onCreate()
     appComponent = DaggerAppComponent
-      .builder()
-      .appModule(AppModule(this))
-      .build()
+      .factory()
+      .create(this, NetworkModule())
   }
 }
