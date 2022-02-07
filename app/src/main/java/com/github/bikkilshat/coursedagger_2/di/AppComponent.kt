@@ -9,15 +9,21 @@ import com.github.bikkilshat.coursedagger_2.intoMap.EventModuleIntoMap
 import com.github.bikkilshat.coursedagger_2.intoSet.EvenModule
 import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
 import com.github.bikkilshat.coursedagger_2.network.ServerApi
-import com.github.bikkilshat.coursedagger_2.presenter.MainActivityPresenter
 import dagger.Component
-import javax.inject.Inject
 
 /***
 Совокупность всех объектов, которые умеет создавать компонент - это граф объектов компонента или граф зависимостей компонента.
  */
 
-@Component(modules = [StorageModule::class, NetworkModule::class, MainModule::class, EvenModule::class, EventModuleIntoMap::class, EvenModuleElementsIntoSet::class])
+@Component(modules = [
+  StorageModule::class,
+  NetworkModule::class,
+  MainModule::class,
+  EvenModule::class,
+  EventModuleIntoMap::class,
+  EvenModuleElementsIntoSet::class,
+  AppModule::class //Но у компонента возникает проблема. Его билдер теперь не может создать объект модуля AppModule, потому что конструктору AppModule требуется Context.
+])
 interface AppComponent {
 
   /* аннотации @Qualifier
@@ -37,7 +43,8 @@ interface AppComponent {
   fun getEventHandlers(): Set<EventHandler>
 
 
- // fun getMainActivityPresenter(): MainActivityPresenter\
+
+  // fun getMainActivityPresenter(): MainActivityPresenter\
 
   fun injectMainActivity(mainActivity: MainActivity)
 

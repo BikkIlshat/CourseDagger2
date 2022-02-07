@@ -1,11 +1,9 @@
 package com.github.bikkilshat.coursedagger_2.di
 
-import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
-import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
+import android.content.Context
 import com.github.bikkilshat.coursedagger_2.storage.Repository
 import dagger.Module
 import dagger.Provides
-import dagger.multibindings.ElementsIntoSet
 
 /***
  * Модули
@@ -18,13 +16,14 @@ class StorageModule {
 
   //В модуле создали Provides метод для создания объекта Repository
   @Provides
-  fun provideRepository(): Repository {
-    return Repository()
+  fun provideRepository(context: Context): Repository {
+    return Repository(context)
   }
 
-}
 
-/***
- * Аннотацией @Module мы сообщаем даггеру, что этот класс является модулем.
- * Аннотацией @Provides указывает, что метод является поставщиком объекта.
- */
+  /***
+   * Аннотацией @Module мы сообщаем даггеру, что этот класс является модулем.
+   * Аннотацией @Provides указывает, что метод является поставщиком объекта.
+   */
+
+}
