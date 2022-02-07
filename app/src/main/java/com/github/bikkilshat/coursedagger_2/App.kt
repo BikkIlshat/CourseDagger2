@@ -2,6 +2,7 @@ package com.github.bikkilshat.coursedagger_2
 
 import android.app.Application
 import com.github.bikkilshat.coursedagger_2.di.AppComponent
+import com.github.bikkilshat.coursedagger_2.di.AppModule
 import com.github.bikkilshat.coursedagger_2.di.DaggerAppComponent
 
 
@@ -15,6 +16,9 @@ class App: Application() {
 
   override fun onCreate() {
     super.onCreate()
-    appComponent = DaggerAppComponent.create()
+    appComponent = DaggerAppComponent
+      .builder()
+      .appModule(AppModule(this))
+      .build()
   }
 }
