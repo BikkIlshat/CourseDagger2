@@ -42,8 +42,6 @@ interface AppComponent {
 
   fun getEventHandlers(): Set<EventHandler>
 
-
-
   // fun getMainActivityPresenter(): MainActivityPresenter\
 
   fun injectMainActivity(mainActivity: MainActivity)
@@ -64,5 +62,36 @@ interface AppComponent {
   // ElementsIntoSet
   ////В итоге, когда даггер будет собирать нам коллекцию Set<EventHandlerElementsIntoSet>, он добавит туда все элементы из databaseHelper.getEventHandlers().
   fun getEventHandlersElementIntoSet(): Set<EventHandlerElementsIntoSet>
+
+
+  /*
+  Урок 6. Builder, Factory
+  Даггер дает нам возможность кастомизировать стандартный билдер.
+  Прямо в интерфейсе компонента (AppComponent) мы описываем интерфейс билдера - AppCompBuilder с аннотацией @Component.Builder.
+   */
+  @Component.Builder
+  interface AppCompBuilder  {
+    // В интерфейсе билдера мы, как минимум, должны описать build метод, который будет создавать компонент.
+    fun buildAppComp(): AppComponent // Имя метода значения не имеет (например, buildAppComp), но он должен быть без аргументов и возвращать AppComponent.
+   // Используем свой билдер, чтобы создать компонент переходим в class App
+
+    /*
+    Чтобы кастомный билдер мог принимать от нас модули, созданные вручную,
+    надо добавить соответствующие методы. Рассмотрим на примере модуля AppModule,
+     который мы рассматривали на прошлом уроке:
+     */
+    fun appModule(appModule: AppModule): AppCompBuilder
+    //Метод должен принимать на вход объект AppModule, а на выходе возвращать билдер AppCompBuilder.
+  // Имя метода может быть любым, я использовал appModule.
+
+    //Даггер создаст в билдере этот метод, и мы сможем его использовать для передачи модуля
+  // в компонент при создании компонента:
+//    appComponent = DaggerAppComponent
+//    .builder()
+//    .appModule(AppModule(this))
+//    .buildAppComp()
+
+  }
+
 }
 
