@@ -2,11 +2,7 @@ package com.github.bikkilshat.coursedagger_2
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
-import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
-import com.github.bikkilshat.coursedagger_2.network.ServerApi
 import com.github.bikkilshat.coursedagger_2.presenter.MainActivityPresenter
-import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
 import javax.inject.Inject
 
 
@@ -21,12 +17,7 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     //Чтобы добраться до компонента из MainActivity, мы можем сделать так:
-    (application as App).appComponent.injectMainActivity(this)
-
-    @Inject
-    fun postInit(networkUtils: NetworkUtils) {
-      // ...
-    }
-
+    val mainComponent = (application as App).appComponent.getMainComponent()
+    mainComponent.getMainActivityPresenter()
   }
 }
