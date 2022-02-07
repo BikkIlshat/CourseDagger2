@@ -1,5 +1,6 @@
 package com.github.bikkilshat.coursedagger_2.di
 
+import android.content.Context
 import com.github.bikkilshat.coursedagger_2.MainActivity
 import com.github.bikkilshat.coursedagger_2.elementsIntoSet.EvenModuleElementsIntoSet
 import com.github.bikkilshat.coursedagger_2.elementsIntoSet.EventHandlerElementsIntoSet
@@ -9,6 +10,7 @@ import com.github.bikkilshat.coursedagger_2.intoMap.EventModuleIntoMap
 import com.github.bikkilshat.coursedagger_2.intoSet.EvenModule
 import com.github.bikkilshat.coursedagger_2.intoSet.EventHandler
 import com.github.bikkilshat.coursedagger_2.network.ServerApi
+import dagger.BindsInstance
 import dagger.Component
 
 /***
@@ -91,6 +93,27 @@ interface AppComponent {
 //    .appModule(AppModule(this))
 //    .buildAppComp()
 
+    /*
+    BindsInstance
+Ранее мы рассмотрели пример, когда с помощью конструктора AppModule мы передавали компоненту объект Context.
+Кастомный билдер дает нам возможность передачи объекта без участия модуля.
+Для этого необходимо описать в кастомном билдере метод с аннотацией @BindsInstance:
+
+     */
+    @BindsInstance
+    //На вход он должен принимать объект, который мы хотим передать компоненту.
+    fun context(context: Context): AppCompBuilder // А на выходе должен возвращать билдер.
+// Теперь Context можно убрать из конструктора AppModule. У компонента будет доступ к этому объекту напрямую, и он сможет передать его в Provides методы для получения SharedPreferences и Resources:
+
+    /*
+    Передаем Context напрямую в компонент с помощью кастомного билдера:
+    appComponent = DaggerAppComponent
+   .builder()
+   .context(this)
+   .buildAppComp()
+     */
+    //В документации указано, что этот способ является более предпочтительным,
+  // чем передача через конструктор модуля.!!!!
   }
 
 }

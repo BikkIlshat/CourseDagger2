@@ -18,7 +18,7 @@ class App: Application() {
     super.onCreate()
     appComponent = DaggerAppComponent
       .builder() //Метод builder() теперь возвращает наш кастомный билдер.
-      .appModule(AppModule(this)) //Код вызывается в Application классе, поэтому this - это Context
+      .context(this) //Код вызывается в Application классе, поэтому this - это Context
       .buildAppComp() //И мы вызываем у него метод buildAppComp, чтобы получить компонент.
   }
 }
