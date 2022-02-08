@@ -41,7 +41,8 @@ interface AppComponent {
   fun getEventHandlersElementIntoSet(): Set<EventHandlerElementsIntoSet>
 
   // этот метод из @Subcomponent
-  fun getMainComponent(): MainComponent
+  //Т.е. мы у компонента просим не сам сабкомпонент, а его кастомный билдер, который мы описывали.
+  fun getMainComponentBuilder(): MainComponent.Builder
 
 
   @Component.Factory

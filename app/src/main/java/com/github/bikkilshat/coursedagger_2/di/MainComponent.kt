@@ -1,7 +1,9 @@
 package com.github.bikkilshat.coursedagger_2.di
 
+import android.app.Activity
 import com.github.bikkilshat.coursedagger_2.presenter.MainActivityPresenter
 import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
+import dagger.BindsInstance
 import dagger.Subcomponent
 
 /*
@@ -9,38 +11,31 @@ import dagger.Subcomponent
  */
 @Subcomponent(modules = [MainModule::class]) //В списке модулей мы указываем MainModule, чтобы сабкомпонент знал, как этот презентер создается.
 interface MainComponent {
-  fun getMainActivityPresenter(): MainActivityPresenter //В интерфейсе мы описываем get метод для получения презентера.
+  //Кастомный билдер для сабкомпонента создается таким же способом, как и билдер для обычного компонента:
+
+  /*
+  Создаем интерфейс с аннотацией @Subcomponent.Builder, и в нем описываем, какие объекты хотим
+  передать в сабкомпонент. Я в этом примере добавил в билдер возможность передать Activity,
+  т.к. оно потребуется сабкомпоненту при создании MainActivityPresenter в MainModule:
+   */
+  @Subcomponent.Builder
+  interface Builder {
+    @BindsInstance fun activity(activity: Activity) : Builder //У сабкомпонента будет Activity и он сможет его использовать для создания презентера
+    fun build(): MainComponent
+  }
+  //В интерфейсе мы описываем get метод для получения презентера.
+  fun getMainActivityPresenter(): MainActivityPresenter
+
   fun getDatabaseHelper(): DatabaseHelper
-  /*
-  Заметьте, что сам MainComponent не знает как его создавать. Мы не прописывали ему модуль StorageModule,
-  где он мог бы это узнать. Но у сабкомпонента MainComponent будет доступ к модулям компонента
-  AppComponent, и у них он сможет попросить этот объект.
-   */
 
-  /*
-  Сабкомпонент - это объект, который умеет все то же, что и компонент, его создавший, плюс имеет какой-то свой функционал.
-Это похоже на иерархию классов. Когда класс наследник умеет все то же, что и класс родитель.
- А также наследник имеет и свой функционал, которого в родителе не было.
-   */
-
-
-  /*
-  Связь
-В чем заключается связь между компонентом и сабкомпонентом?
-Если помните, компонент AppComponent мы создаем вручную, используя билдер (или фабрику) из доступного
-нам класса DaggerAppComponent, который создается даггером.
-Но для сабкомпонентов такой класс не создается. Вернее, у нас нет доступа к этому классу.
-Поэтому создать сабкомпонент сами мы не можем. Это может сделать только компонент,
-который является родителем для сабкомпонента.
-Когда мы в AppComponent прописали метод, который возвращает MainComponent,
- мы тем самым обозначили, что компонент AppComponent будет родителем для сабкомпонента MainComponent.
-  И если нам нужен экземпляр MainComponent, мы можем получить его от AppComponent.
-Это ведет к тому, что компонент и сабкомпонент тесно связаны друг с другом под капотом.
-Компонент сам создает класс-реализацию интерфейса сабкомпонента. Т.е. класс компонента (DaggerAppComponent)
-внутри себя создает класс MainComponentImpl, который является реализацией интерфейса MainComponent.
-Эта реализация сабкомпонента (MainComponentImpl) включает в себя ссылку на компонент,
-который его создал. Т.е. сабкомпонент имеет доступ к компоненту.
-А если быть совсем точным, то к модулям компонента. Используя модули компонента,
- сабкомпонент может создать любой объект, доступный компоненту.
-   */
 }
+/*
+Мы настроили кастомный билдер у сабкомпонента. Как нам теперь получить этот билдер,
+чтобы создать сабкомпонент? Мы можем попросить его у компонента родителя:
+
+@Component(modules = [StorageModule::class, NetworkModule::class........])
+interface AppComponent {
+   fun getMainComponentBuilder(): MainComponent.Builder
+
+}
+ */

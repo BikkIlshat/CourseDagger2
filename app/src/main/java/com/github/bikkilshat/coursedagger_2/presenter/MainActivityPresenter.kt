@@ -1,5 +1,7 @@
 package com.github.bikkilshat.coursedagger_2.presenter
 
+import android.app.Activity
+import com.github.bikkilshat.coursedagger_2.MainActivity
 import com.github.bikkilshat.coursedagger_2.network.NetworkUtils
 import com.github.bikkilshat.coursedagger_2.storage.DatabaseHelper
 import javax.inject.Inject
@@ -8,6 +10,7 @@ import javax.inject.Inject
 class MainActivityPresenter @Inject constructor(
   private val databaseHelper: DatabaseHelper,
   private val networkUtils: NetworkUtils,
+  private val activity: Activity
 ) {
 
 }
