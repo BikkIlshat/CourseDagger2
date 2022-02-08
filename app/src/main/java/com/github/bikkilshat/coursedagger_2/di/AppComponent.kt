@@ -25,7 +25,7 @@ import dagger.Subcomponent
   EvenModule::class,
   EventModuleIntoMap::class,
   EvenModuleElementsIntoSet::class,
-  AppModule::class
+  AppModule::class,
 ])
 interface AppComponent {
 
@@ -40,8 +40,7 @@ interface AppComponent {
   // ElementsIntoSet
   fun getEventHandlersElementIntoSet(): Set<EventHandlerElementsIntoSet>
 
-  // этот метод из @Subcomponent
-  fun getMainComponent(): MainComponent
+  fun injectMainActivity(activity: MainActivity)
 
 
   @Component.Factory

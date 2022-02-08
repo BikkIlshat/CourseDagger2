@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 
 
-@Module
+@Module(subcomponents = [MainComponent::class])
 class AppModule {
 
   @Provides
