@@ -14,15 +14,15 @@ interface MainComponent {
   //Кастомный билдер для сабкомпонента создается таким же способом, как и билдер для обычного компонента:
 
   /*
-  Создаем интерфейс с аннотацией @Subcomponent.Builder, и в нем описываем, какие объекты хотим
-  передать в сабкомпонент. Я в этом примере добавил в билдер возможность передать Activity,
-  т.к. оно потребуется сабкомпоненту при создании MainActivityPresenter в MainModule:
+Factory
+Еще один способ передать объекты сабкомпоненту - это Factory. Ее мы уже проходили в уроке про билдеры. Для сабкомпонента все аналогично.
    */
-  @Subcomponent.Builder
-  interface Builder {
-    @BindsInstance fun activity(activity: Activity) : Builder //У сабкомпонента будет Activity и он сможет его использовать для создания презентера
-    fun build(): MainComponent
+  @Subcomponent.Factory
+  interface Factory {
+    fun create(@BindsInstance activity: Activity): MainComponent //У сабкомпонента будет Activity и он сможет его использовать для создания презентера
+
   }
+
   //В интерфейсе мы описываем get метод для получения презентера.
   fun getMainActivityPresenter(): MainActivityPresenter
 

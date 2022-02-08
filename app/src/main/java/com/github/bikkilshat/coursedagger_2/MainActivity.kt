@@ -17,8 +17,9 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     //Чтобы добраться до компонента из MainActivity, мы можем сделать так:
-    val mainComponent = (application as App).appComponent.getMainComponentBuilder()
-      .activity(this)
-      .build()
+    val mainComponent = (application as App)
+      .appComponent
+      .getMainComponentFactory()
+      .create(this)
   }
 }

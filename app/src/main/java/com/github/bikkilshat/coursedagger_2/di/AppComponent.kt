@@ -42,7 +42,7 @@ interface AppComponent {
 
   // этот метод из @Subcomponent
   //Т.е. мы у компонента просим не сам сабкомпонент, а его кастомный билдер, который мы описывали.
-  fun getMainComponentBuilder(): MainComponent.Builder
+  fun getMainComponentFactory(): MainComponent.Factory
 
 
   @Component.Factory
