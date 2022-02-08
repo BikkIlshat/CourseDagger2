@@ -42,6 +42,7 @@ interface AppComponent {
 
   fun injectMainActivity(activity: MainActivity)
 
+
   @Component.Factory
   interface AppCompFactory {
     fun create(

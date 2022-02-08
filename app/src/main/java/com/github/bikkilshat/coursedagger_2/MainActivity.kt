@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
 
   @Inject
-  lateinit var mainComponentFactory: MainComponent.Factory
+  lateinit var mainComponentBuilder: MainComponent.Builder
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -20,6 +20,6 @@ class MainActivity : AppCompatActivity() {
     //Чтобы добраться до компонента из MainActivity, мы можем сделать так:
     (application as App).appComponent.injectMainActivity(this)
 
-    val mainComponent = mainComponentFactory.create(this)
+    val mainComponent = mainComponentBuilder.activity(this).build()
   }
 }
