@@ -25,7 +25,7 @@ import dagger.Subcomponent
   EvenModule::class,
   EventModuleIntoMap::class,
   EvenModuleElementsIntoSet::class,
-  AppModule::class
+  AppModule::class,
 ])
 interface AppComponent {
 
@@ -40,10 +40,7 @@ interface AppComponent {
   // ElementsIntoSet
   fun getEventHandlersElementIntoSet(): Set<EventHandlerElementsIntoSet>
 
-  // этот метод из @Subcomponent
-  //Т.е. мы у компонента просим не сам сабкомпонент, а его кастомный билдер, который мы описывали.
-  fun getMainComponentFactory(): MainComponent.Factory
-
+  fun injectMainActivity(activity: MainActivity)
 
   @Component.Factory
   interface AppCompFactory {
